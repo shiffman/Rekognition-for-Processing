@@ -1,0 +1,60 @@
+{
+  "status": "success",
+  "images": [
+    "http://s3.amazonaws.com/rapgenius/fema_-_39841_-_official_portrait_of_president-elect_barack_obama_on_jan-_13.jpg"
+  ],
+  "photos": [
+    {
+      "url": "http://s3.amazonaws.com/rapgenius/fema_-_39841_-_official_portrait_of_president-elect_barack_obama_on_jan-_13.jpg",
+      "width": 735,
+      "tags": [
+        {
+          "eye_left": {
+            "y": 341,
+            "x": 499
+          },
+          "confidence": 0.978945010372561,
+          "center": {
+            "y": 380,
+            "x": 439
+          },
+          "width": 335,
+          "mouth_left": {
+            "y": 504.5,
+            "x": 377
+          },
+          "height": 335,
+          "mouth_right": {
+            "y": 504.5,
+            "x": 456
+          },
+          "mouth_center": {
+            "y": 504.5,
+            "x": 416.5
+          },
+          "nose": {
+            "y": 434,
+            "x": 432
+          },
+          "tid": "31337",
+          "attributes": [
+            {
+              "smile_rating": 0.2,
+              "smiling": false,
+              "confidence": 0.2
+            },
+            {
+              "gender": "male",
+              "confidence": 0.7924602110672674
+            }
+          ],
+          "eye_right": {
+            "y": 348,
+            "x": 369
+          }
+        }
+      ],
+      "height": 1000
+    }
+  ]
+}
