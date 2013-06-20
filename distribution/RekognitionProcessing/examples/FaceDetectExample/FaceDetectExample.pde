@@ -15,7 +15,7 @@ RekognitionFace facerekog;
 PImage img;
 Face[] faces;
 
-public void setup() {
+void setup() {
   size(800, 600);
   
   // load image for drawing
@@ -35,7 +35,7 @@ public void setup() {
   faces = facerekog.detectFacesPath(sketchPath("data/"+filename));
 }
 
-public void draw() {
+void draw() {
   background(0);
   
   // Draw the image
