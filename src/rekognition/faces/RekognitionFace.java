@@ -17,6 +17,9 @@ public class RekognitionFace {
 	String rekog_secret = "";
 
 	PApplet p5;
+	
+	String name_space = "default";
+	String user_id = "default";
 
 	public static final String api = "http://rekognition.com/func/api/";
 
@@ -30,7 +33,12 @@ public class RekognitionFace {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
+
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+
 		post.addData("jobs","face_part_gender_emotion_age_glass");
+
 		post.addFile("urls", url);
 		post.send();
 		String content = post.getContent();
@@ -41,6 +49,10 @@ public class RekognitionFace {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
+		
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+
 		post.addData("jobs","face_part_gender_emotion_age_glass");
 		post.addFile("uploaded_file", f);
 		post.send();
@@ -52,9 +64,10 @@ public class RekognitionFace {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
-		// Should add these eventually, now just using default
-		//post.addData("name_space",namespace);
-		//post.addData("user_id",user_id);
+		
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+		
 		post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
 		File f = new File(path);
 		post.addFile("uploaded_file", f);
@@ -68,15 +81,15 @@ public class RekognitionFace {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
-		// Should add these eventually, now just using default
-		//post.addData("name_space",namespace);
-		//post.addData("user_id",user_id);
+		
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+
 		post.addData("job_list", "face_add_[" + name + "]");
+
 		File f = new File(path);
 		post.addFile("uploaded_file", f);
 		post.send();
-		//String content = post.getContent();
-		//System.out.println(content);	
 	}
 	
 
@@ -85,13 +98,14 @@ public class RekognitionFace {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
-		// Should add these eventually, now just using default
-		//post.addData("name_space",namespace);
-		//post.addData("user_id",user_id);
+
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+
 		post.addData("job_list", "face_train");
 		post.send();
-		//String content = post.getContent();
-		//System.out.println(content);	
+		String content = post.getContent();
+		System.out.println(content);	
 	}
 
 
@@ -135,4 +149,14 @@ public class RekognitionFace {
 		return null;
 
 	}
+	
+	public void setNamespace(String s) {
+		name_space = s;
+	}
+	
+	public void setUserID(String s) {
+		user_id = s;
+	}
+
+
 }

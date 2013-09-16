@@ -19,6 +19,8 @@ public class FaceRecognize extends PApplet {
 		String secret = keys[1];
 		img = loadImage(path);
 		RekognitionFace face = new RekognitionFace(this,key,secret);
+		face.setNamespace("test999");
+		face.setUserID("1");
 		faces = face.recognizeFace(path);
 	}
 

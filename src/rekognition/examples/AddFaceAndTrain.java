@@ -17,8 +17,12 @@ public class AddFaceAndTrain extends PApplet {
 		String key = keys[0];
 		String secret = keys[1];
 		RekognitionFace face = new RekognitionFace(this,key,secret);
-		//face.addFace("data/obama.jpg", "Obama");
+		face.setNamespace("test999");
+		face.setUserID("1");
+		
+		face.addFace("data/obama.jpg", "Obama");
 		face.addFace("data/pitt.jpg", "Pitt");
+		
 		face.train();	
 	}
 	
