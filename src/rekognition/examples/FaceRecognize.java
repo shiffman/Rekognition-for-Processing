@@ -3,14 +3,14 @@ package rekognition.examples;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.data.FloatDict;
-import rekognition.faces.Face;
-import rekognition.faces.RekognitionFace;
+import rekognition.faces.RFace;
+import rekognition.faces.Rekognition;
 
 public class FaceRecognize extends PApplet {
 	String path = "data/obama2.jpg";
 	PImage img;
 
-	Face[] faces;
+	RFace[] faces;
 
 	public void setup() {
 		size(800,600);
@@ -18,7 +18,7 @@ public class FaceRecognize extends PApplet {
 		String key = keys[0];
 		String secret = keys[1];
 		img = loadImage(path);
-		RekognitionFace face = new RekognitionFace(this,key,secret);
+		Rekognition face = new Rekognition(this,key,secret);
 		face.setNamespace("test999");
 		face.setUserID("1");
 		faces = face.recognizeFace(path);

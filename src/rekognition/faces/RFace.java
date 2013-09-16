@@ -8,7 +8,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 import processing.data.FloatDict;
 
-public class Face {
+public class RFace {
 
 
 	public PVector topleft;
@@ -46,10 +46,10 @@ public class Face {
 	String json;
 	FloatDict names;
 
-	public Face() {
+	public RFace() {
 	}
 
-	public Face(int w, int h) {
+	public RFace(int w, int h) {
 		photoWidth = w;
 		photoHeight = h;
 	}

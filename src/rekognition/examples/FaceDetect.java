@@ -4,14 +4,14 @@ import java.io.File;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import rekognition.faces.Face;
-import rekognition.faces.RekognitionFace;
+import rekognition.faces.RFace;
+import rekognition.faces.Rekognition;
 
 public class FaceDetect extends PApplet {
 
 	String path = "data/obama.jpg";
 	PImage img;
-	Face[] faces;
+	RFace[] faces;
 	
 	public void setup() {
 		size(800,600);
@@ -19,7 +19,7 @@ public class FaceDetect extends PApplet {
 		String key = keys[0];
 		String secret = keys[1];
 		
-		RekognitionFace face = new RekognitionFace(this,key,secret);
+		Rekognition face = new Rekognition(this,key,secret);
 		img = loadImage(path);
 		faces = face.detectFacesPath(path);
 	}

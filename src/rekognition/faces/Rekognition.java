@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import processing.core.PApplet;
 //import processing.core.PImage;
 
-public class RekognitionFace {
+public class Rekognition {
 
 	String rekog_key = "";
 	String rekog_secret = "";
@@ -23,13 +23,13 @@ public class RekognitionFace {
 
 	public static final String api = "http://rekognition.com/func/api/";
 
-	public RekognitionFace(PApplet p5_, String key, String secret) {
+	public Rekognition(PApplet p5_, String key, String secret) {
 		p5 = p5_;
 		rekog_key = key;
 		rekog_secret = secret;
 	}
 
-	public Face[] detectFacesURL(String url) {
+	public RFace[] detectFacesURL(String url) {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
@@ -45,7 +45,7 @@ public class RekognitionFace {
 		return facesFromJSON(content);
 	}
 
-	public Face[] detectFaces(File f) {
+	public RFace[] detectFaces(File f) {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
@@ -60,7 +60,7 @@ public class RekognitionFace {
 		return facesFromJSON(content);
 	}
 	
-	public Face[]  recognizeFace(String path) {
+	public RFace[]  recognizeFace(String path) {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
@@ -109,7 +109,7 @@ public class RekognitionFace {
 	}
 
 
-	public Face[] detectFacesPath(String path) {
+	public RFace[] detectFacesPath(String path) {
 		File f = new File(path);
 		// Not worrying about size for now
 		/*long size = f.length();
@@ -132,14 +132,14 @@ public class RekognitionFace {
 
 
 
-	public Face[] facesFromJSON(String content) {
+	public RFace[] facesFromJSON(String content) {
 		try {
 			JSONObject data = new JSONObject(content);
 			JSONArray facearray = data.getJSONArray("face_detection");
 
-			Face[] faces = new Face[facearray.length()];
+			RFace[] faces = new RFace[facearray.length()];
 			for (int i = 0; i < faces.length; i++) {
-				faces[i] = new Face();  // Fix to include width and height!
+				faces[i] = new RFace();  // Fix to include width and height!
 				faces[i].fromJSON(facearray.getJSONObject(i));
 			}
 			return faces;

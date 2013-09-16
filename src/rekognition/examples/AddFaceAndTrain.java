@@ -4,8 +4,8 @@ import java.io.File;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import rekognition.faces.Face;
-import rekognition.faces.RekognitionFace;
+import rekognition.faces.RFace;
+import rekognition.faces.Rekognition;
 
 public class AddFaceAndTrain extends PApplet {
 
@@ -16,7 +16,7 @@ public class AddFaceAndTrain extends PApplet {
 		String[] keys = loadStrings("key.txt");
 		String key = keys[0];
 		String secret = keys[1];
-		RekognitionFace face = new RekognitionFace(this,key,secret);
+		Rekognition face = new Rekognition(this,key,secret);
 		face.setNamespace("test999");
 		face.setUserID("1");
 		
