@@ -69,7 +69,7 @@ public class Rekognition {
 		post.addData("user_id",user_id);
 		
 		post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
-		File f = new File(path);
+		File f = new File(p5.sketchPath(path));
 		post.addFile("uploaded_file", f);
 		post.send();
 		String content = post.getContent();
@@ -87,7 +87,7 @@ public class Rekognition {
 
 		post.addData("job_list", "face_add_[" + name + "]");
 
-		File f = new File(path);
+		File f = new File(p5.sketchPath(path));
 		post.addFile("uploaded_file", f);
 		post.send();
 	}
@@ -110,7 +110,7 @@ public class Rekognition {
 
 
 	public RFace[] detectFacesPath(String path) {
-		File f = new File(path);
+		File f = new File(p5.sketchPath(path));
 		// Not worrying about size for now
 		/*long size = f.length();
 		int maxsize = 1000000;
