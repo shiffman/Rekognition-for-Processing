@@ -1,4 +1,4 @@
-LambdaProcessing
-================
+Rekognition for Processing
+==========================
 
-A quick Processing library to make using Lambda Labs Face Recognition Library easy to use in Processing
+A quick Processing library to make using [Rekognition API](http://rekognition.com/) easy to use in Processing.
