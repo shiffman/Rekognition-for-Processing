@@ -9,8 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import processing.core.PApplet;
-import processing.core.PImage;
-import processing.core.PVector;
+//import processing.core.PImage;
 
 public class RekognitionFace {
 
@@ -26,8 +25,6 @@ public class RekognitionFace {
 		rekog_key = key;
 		rekog_secret = secret;
 	}
-
-
 
 	public Face[] detectFacesURL(String url) {
 		PostRequest post = new PostRequest(api);
@@ -78,7 +75,7 @@ public class RekognitionFace {
 		File f = new File(path);
 		post.addFile("uploaded_file", f);
 		post.send();
-		String content = post.getContent();
+		//String content = post.getContent();
 		//System.out.println(content);	
 	}
 	
@@ -93,14 +90,15 @@ public class RekognitionFace {
 		//post.addData("user_id",user_id);
 		post.addData("job_list", "face_train");
 		post.send();
-		String content = post.getContent();
+		//String content = post.getContent();
 		//System.out.println(content);	
 	}
 
 
 	public Face[] detectFacesPath(String path) {
 		File f = new File(path);
-		long size = f.length();
+		// Not worrying about size for now
+		/*long size = f.length();
 		int maxsize = 1000000;
 		if (size > maxsize) {
 			String tempPath = "temp/temp.jpg";
@@ -114,7 +112,8 @@ public class RekognitionFace {
 			return detectFacesPath(tempPath);
 		} else {
 			return detectFaces(f);
-		}
+		}*/
+		return detectFaces(f);
 	}
 
 

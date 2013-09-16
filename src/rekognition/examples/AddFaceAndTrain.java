@@ -19,9 +19,7 @@ public class AddFaceAndTrain extends PApplet {
 		RekognitionFace face = new RekognitionFace(this,key,secret);
 		//face.addFace("data/obama.jpg", "Obama");
 		face.addFace("data/pitt.jpg", "Pitt");
-		face.train();
-		
-		
+		face.train();	
 	}
 	
 	public void draw() {
