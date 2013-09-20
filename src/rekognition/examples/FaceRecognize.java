@@ -7,7 +7,7 @@ import rekognition.faces.RFace;
 import rekognition.faces.Rekognition;
 
 public class FaceRecognize extends PApplet {
-	String path = "data/obama2.jpg";
+	String path = "data/obama.jpg";
 	PImage img;
 
 	RFace[] faces;
@@ -19,8 +19,8 @@ public class FaceRecognize extends PApplet {
 		String secret = keys[1];
 		img = loadImage(path);
 		Rekognition face = new Rekognition(this,key,secret);
-		face.setNamespace("test999");
-		face.setUserID("1");
+		face.setNamespace("faceit1");
+		face.setUserID("shiffman");
 		faces = face.recognizeFace(path);
 	}
 

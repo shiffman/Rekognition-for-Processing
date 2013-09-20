@@ -17,21 +17,17 @@ public class AddFaceAndTrain extends PApplet {
 		String key = keys[0];
 		String secret = keys[1];
 		Rekognition face = new Rekognition(this,key,secret);
-		face.setNamespace("test999");
-		face.setUserID("1");
+		face.setNamespace("faceit1");
+		face.setUserID("shiffman");
 		
-		face.addFace("data/obama.jpg", "Obama");
-		face.addFace("data/pitt.jpg", "Pitt");
-		
+		face.addFace("data/pitt.jpg", "Brad Pitt");
+		face.addFace("data/obama.jpg","Barack Obama");
+		  	
 		face.train();	
 	}
 	
 	public void draw() {
 		background(0);	
-	}
-	
-	public void mousePressed() {
-		//face.train();
 	}
 	
 	public static void main(String[] args) {
