@@ -67,34 +67,34 @@ public class Rekognition {
 		
 		post.addData("name_space",name_space);
 		post.addData("user_id",user_id);
-		System.out.println("Recognize: " + name_space + " " + user_id);
+		//System.out.println("Recognize: " + name_space + " " + user_id);
 		post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
 		File f = new File(p5.sketchPath(path));
 		post.addFile("uploaded_file", f);
 		post.send();
 		String content = post.getContent();
-		System.out.println(content);
+		//System.out.println(content);
 		return facesFromJSON(content);
 	}
 
 	public void addFace(String path, String name) {
 		name = name.replaceAll("\\s", "_");
-		System.out.println("Name: " + name);
+		//System.out.println("Name: " + name);
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
 		
 		post.addData("name_space",name_space);
 		post.addData("user_id",user_id);
-		System.out.println("add face: " + name_space + " " + user_id);
+		//System.out.println("add face: " + name_space + " " + user_id);
 
 		post.addData("job_list", "face_add_[" + name + "]");
 
 		File f = new File(p5.sketchPath(path));
 		post.addFile("uploaded_file", f);
 		post.send();
-		String content = post.getContent();
-		System.out.println(content);	
+		//String content = post.getContent();
+		//System.out.println(content);	
 		
 	}
 	
@@ -107,12 +107,12 @@ public class Rekognition {
 
 		post.addData("name_space",name_space);
 		post.addData("user_id",user_id);
-		System.out.println("Train: " + name_space + " " + user_id);
+		//System.out.println("Train: " + name_space + " " + user_id);
 
 		post.addData("job_list", "face_train");
 		post.send();
 		String content = post.getContent();
-		System.out.println(content);	
+		//System.out.println(content);	
 	}
 
 
