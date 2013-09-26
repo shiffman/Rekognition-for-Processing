@@ -186,7 +186,7 @@ public class Rekognition {
 
 		post.addData("job_list", "face_train");
 		post.send();
-		String content = post.getContent();
+		//String content = post.getContent();
 		//System.out.println(content);	
 	}
 	
