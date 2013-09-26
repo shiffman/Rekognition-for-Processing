@@ -26,6 +26,7 @@ public class FaceDetect extends PApplet {
 	
 	public void draw() {
 		background(0);	
+		image(img,0,0);
 		for (int i = 0; i < faces.length; i++) {
 			stroke(255,0,0);
 			strokeWeight(1);

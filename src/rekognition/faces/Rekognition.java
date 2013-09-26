@@ -62,7 +62,7 @@ public class Rekognition {
 
 		post.addData("jobs","face_part_gender_emotion_age_glass");
 
-		post.addFile("urls", url);
+		post.addData("urls", url);
 		post.send();
 		String content = post.getContent();
 		return facesFromJSON(content);
@@ -133,7 +133,7 @@ public class Rekognition {
 
 		post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
 
-		post.addFile("urls", url);
+		post.addData("urls", url);
 		post.send();
 		String content = post.getContent();
 
