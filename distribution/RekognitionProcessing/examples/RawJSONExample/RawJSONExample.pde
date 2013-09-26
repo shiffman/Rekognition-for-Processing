@@ -1,4 +1,4 @@
-// Detect a Face
+// See raw JSON from API
 // Daniel Shiffman
 // https://github.com/shiffman/RekognitionProcessing
 // http://rekognition.com/
@@ -19,32 +19,47 @@ Rekognition rekog;
 PImage img;
 RFace[] faces;
 
+String json = "";
+
 void setup() {
   size(800, 600);
-  
+
   // load image for drawing
   String filename = "obama.jpg";
   img = loadImage(filename);
-  
+
   // Load the API keys
   String[] keys = loadStrings("key.txt");
   String api_key = keys[0];
   String api_secret = keys[1];
-  
+
   // Create the face recognizer object
   rekog = new Rekognition(this, api_key, api_secret);
   
-  // Detect faces in image
-  // We will get a list of Face objects
-  faces = rekog.detect(filename);
+  // We can get a post request
+  PostRequest post = rekog.createPostRequest();
+  // And manually configure it
+  post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
+  // Adding a file
+  File f = new File(dataPath(filename));
+  post.addFile("uploaded_file", f);
+  // And send it
+  post.send();
+  // Now we can look at the raw JSON
+  json = post.getContent();
+  
+  faces = rekog.facesFromJSON(json);
+  
+  // Print JSON to console
+  println(json);
 }
 
 void draw() {
   background(0);
-  
+
   // Draw the image
   image(img, 0, 0);
-  
+
   // The face objects have lots of information stored
   for (int i = 0; i < faces.length; i++) {
     stroke(0, 0, 0);
@@ -57,7 +72,7 @@ void draw() {
     rect(faces[i].mouth_left.x, faces[i].mouth_left.y, 4, 4);            // Mouth Left
     rect(faces[i].mouth_right.x, faces[i].mouth_right.y, 4, 4);          // Mouth right
     rect(faces[i].nose.x, faces[i].nose.y, 4, 4);                        // Nose
-    fill(0,255,0);
+    fill(0, 255, 0);
     String display = "Age: " + int(faces[i].age) + "\n\n";                        // Age
     display += "Gender: " + faces[i].gender + "\n";                               // Gender
     display += "Gender rating: " + nf(faces[i].gender_rating, 1, 2) + "\n\n";     // Gender from 0 to 1, 1 male, 0 female
