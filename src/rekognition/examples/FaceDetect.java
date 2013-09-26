@@ -21,7 +21,7 @@ public class FaceDetect extends PApplet {
 		
 		Rekognition face = new Rekognition(this,key,secret);
 		img = loadImage(path);
-		faces = face.detectFacesPath(path);
+		faces = face.detect(path);
 	}
 	
 	public void draw() {

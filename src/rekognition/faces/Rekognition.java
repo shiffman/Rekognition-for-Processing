@@ -69,23 +69,23 @@ public class Rekognition {
 	}
 	
 	
-	public void recognize(String s) {
+	public RFace[] recognize(String s) {
 		Pattern p = Pattern.compile("^http",Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(s);
 		if (m.find()) {
-			recognizeFacesURL(s);
+			return recognizeFacesURL(s);
 		} else {
-			recognizeFacesPath(s);
+			return recognizeFacesPath(s);
 		}
 	}
 
-	public void detect(String s) {
+	public RFace[] detect(String s) {
 		Pattern p = Pattern.compile("^http",Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(s);
 		if (m.find()) {
-			detectFacesURL(s);
+			return detectFacesURL(s);
 		} else {
-			detectFacesPath(s);
+			return detectFacesPath(s);
 		}
 	}
 
