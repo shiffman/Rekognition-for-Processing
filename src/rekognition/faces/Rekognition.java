@@ -120,6 +120,8 @@ public class Rekognition {
 
 		post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
 		File f = new File(p5.sketchPath(path));
+		
+		// Now try data paths
 		if (!f.exists()) {
 		   f = new File(p5.dataPath(path));
 		}
@@ -161,6 +163,12 @@ public class Rekognition {
 		post.addData("job_list", "face_add_[" + name + "]");
 
 		File f = new File(p5.sketchPath(path));
+		
+		// Now try data path
+		if (!f.exists()) {
+		   f = new File(p5.dataPath(path));
+		}
+		
 		post.addFile("uploaded_file", f);
 		post.send();
 	}
