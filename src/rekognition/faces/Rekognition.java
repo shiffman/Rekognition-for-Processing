@@ -3,6 +3,8 @@ package rekognition.faces;
 import httprocessing.PostRequest;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,7 +67,29 @@ public class Rekognition {
 		String content = post.getContent();
 		return facesFromJSON(content);
 	}
+	
+	
+	public void recognize(String s) {
+		Pattern p = Pattern.compile("^http",Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(s);
+		if (m.find()) {
+			recognizeFacesURL(s);
+		} else {
+			recognizeFacesPath(s);
+		}
+	}
 
+	public void detect(String s) {
+		Pattern p = Pattern.compile("^http",Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(s);
+		if (m.find()) {
+			detectFacesURL(s);
+		} else {
+			detectFacesPath(s);
+		}
+	}
+
+	
 	
 	public RFace[] detectFaces(File f) {
 		PostRequest post = new PostRequest(api);
