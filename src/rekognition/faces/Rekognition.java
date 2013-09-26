@@ -150,7 +150,20 @@ public class Rekognition {
 		String content = post.getContent();
 		//System.out.println(content);	
 	}
-
+	
+	
+	public PostRequest createPostRequest() {
+		PostRequest post = new PostRequest(api);
+		post.addData("api_key", rekog_key);
+		post.addData("api_secret", rekog_secret);
+		
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+		return post;
+	}
+	
+	
+	
 
 	public RFace[] facesFromJSON(String content) {
 		try {
