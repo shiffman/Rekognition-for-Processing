@@ -33,6 +33,10 @@ public class Rekognition {
 	
 	public RFace[] detectFacesPath(String path) {
 		File f = new File(p5.sketchPath(path));
+		// Now try the data path
+		if (!f.exists()) {
+		   f = new File(p5.dataPath(path));
+		}
 		// Not worrying about size for now
 		/*long size = f.length();
 		int maxsize = 1000000;
@@ -116,6 +120,9 @@ public class Rekognition {
 
 		post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
 		File f = new File(p5.sketchPath(path));
+		if (!f.exists()) {
+		   f = new File(p5.dataPath(path));
+		}
 		post.addFile("uploaded_file", f);
 		post.send();
 		String content = post.getContent();

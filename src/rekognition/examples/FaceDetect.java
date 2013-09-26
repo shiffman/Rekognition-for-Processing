@@ -9,7 +9,7 @@ import rekognition.faces.Rekognition;
 
 public class FaceDetect extends PApplet {
 
-	String path = "data/obama.jpg";
+	String path = "obama.jpg";
 	PImage img;
 	RFace[] faces;
 	
