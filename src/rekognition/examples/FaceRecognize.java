@@ -21,7 +21,7 @@ public class FaceRecognize extends PApplet {
 		Rekognition face = new Rekognition(this,key,secret);
 		face.setNamespace("faceit1");
 		face.setUserID("shiffman");
-		faces = face.recognizeFace(path);
+		faces = face.recognizeFacesPath(path);
 	}
 
 	public void draw() {

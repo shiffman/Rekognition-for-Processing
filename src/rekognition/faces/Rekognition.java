@@ -28,94 +28,7 @@ public class Rekognition {
 		rekog_key = key;
 		rekog_secret = secret;
 	}
-
-	public RFace[] detectFacesURL(String url) {
-		PostRequest post = new PostRequest(api);
-		post.addData("api_key", rekog_key);
-		post.addData("api_secret", rekog_secret);
-
-		post.addData("name_space",name_space);
-		post.addData("user_id",user_id);
-
-		post.addData("jobs","face_part_gender_emotion_age_glass");
-
-		post.addFile("urls", url);
-		post.send();
-		String content = post.getContent();
-		return facesFromJSON(content);
-	}
-
-	public RFace[] detectFaces(File f) {
-		PostRequest post = new PostRequest(api);
-		post.addData("api_key", rekog_key);
-		post.addData("api_secret", rekog_secret);
-		
-		post.addData("name_space",name_space);
-		post.addData("user_id",user_id);
-
-		post.addData("jobs","face_part_gender_emotion_age_glass");
-		post.addFile("uploaded_file", f);
-		post.send();
-		String content = post.getContent();
-		return facesFromJSON(content);
-	}
 	
-	public RFace[]  recognizeFace(String path) {
-		PostRequest post = new PostRequest(api);
-		post.addData("api_key", rekog_key);
-		post.addData("api_secret", rekog_secret);
-		
-		post.addData("name_space",name_space);
-		post.addData("user_id",user_id);
-		//System.out.println("Recognize: " + name_space + " " + user_id);
-		post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
-		File f = new File(p5.sketchPath(path));
-		post.addFile("uploaded_file", f);
-		post.send();
-		String content = post.getContent();
-		//System.out.println(content);
-		return facesFromJSON(content);
-	}
-
-	public void addFace(String path, String name) {
-		name = name.replaceAll("\\s", "_");
-		//System.out.println("Name: " + name);
-		PostRequest post = new PostRequest(api);
-		post.addData("api_key", rekog_key);
-		post.addData("api_secret", rekog_secret);
-		
-		post.addData("name_space",name_space);
-		post.addData("user_id",user_id);
-		//System.out.println("add face: " + name_space + " " + user_id);
-
-		post.addData("job_list", "face_add_[" + name + "]");
-
-		File f = new File(p5.sketchPath(path));
-		post.addFile("uploaded_file", f);
-		post.send();
-		//String content = post.getContent();
-		//System.out.println(content);	
-		
-	}
-	
-
-	
-	public void train() {
-		PostRequest post = new PostRequest(api);
-		post.addData("api_key", rekog_key);
-		post.addData("api_secret", rekog_secret);
-
-		post.addData("name_space",name_space);
-		post.addData("user_id",user_id);
-		//System.out.println("Train: " + name_space + " " + user_id);
-
-		post.addData("job_list", "face_train");
-		post.send();
-		String content = post.getContent();
-		//System.out.println(content);	
-	}
-
-
 	public RFace[] detectFacesPath(String path) {
 		File f = new File(p5.sketchPath(path));
 		// Not worrying about size for now
@@ -137,6 +50,106 @@ public class Rekognition {
 		return detectFaces(f);
 	}
 
+	public RFace[] detectFacesURL(String url) {
+		PostRequest post = new PostRequest(api);
+		post.addData("api_key", rekog_key);
+		post.addData("api_secret", rekog_secret);
+
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+
+		post.addData("jobs","face_part_gender_emotion_age_glass");
+
+		post.addFile("urls", url);
+		post.send();
+		String content = post.getContent();
+		return facesFromJSON(content);
+	}
+
+	
+	public RFace[] detectFaces(File f) {
+		PostRequest post = new PostRequest(api);
+		post.addData("api_key", rekog_key);
+		post.addData("api_secret", rekog_secret);
+		
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+
+		post.addData("jobs","face_part_gender_emotion_age_glass");
+		post.addFile("uploaded_file", f);
+		post.send();
+		String content = post.getContent();
+		return facesFromJSON(content);
+	}
+	
+	public RFace[]  recognizeFacesPath(String path) {
+		PostRequest post = new PostRequest(api);
+		post.addData("api_key", rekog_key);
+		post.addData("api_secret", rekog_secret);
+		
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+
+		post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
+		File f = new File(p5.sketchPath(path));
+		post.addFile("uploaded_file", f);
+		post.send();
+		String content = post.getContent();
+
+		return facesFromJSON(content);
+	}
+	
+	public RFace[]  recognizeFacesURL(String url) {
+		PostRequest post = new PostRequest(api);
+		post.addData("api_key", rekog_key);
+		post.addData("api_secret", rekog_secret);
+		
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+
+		post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
+
+		post.addFile("urls", url);
+		post.send();
+		String content = post.getContent();
+
+		return facesFromJSON(content);
+	}
+	
+	
+	public void addFace(String path, String name) {
+		name = name.replaceAll("\\s", "_");
+
+		PostRequest post = new PostRequest(api);
+		post.addData("api_key", rekog_key);
+		post.addData("api_secret", rekog_secret);
+		
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+
+		post.addData("job_list", "face_add_[" + name + "]");
+
+		File f = new File(p5.sketchPath(path));
+		post.addFile("uploaded_file", f);
+		post.send();
+	}
+	
+
+	
+	public void train() {
+		PostRequest post = new PostRequest(api);
+		post.addData("api_key", rekog_key);
+		post.addData("api_secret", rekog_secret);
+
+		post.addData("name_space",name_space);
+		post.addData("user_id",user_id);
+		//System.out.println("Train: " + name_space + " " + user_id);
+
+		post.addData("job_list", "face_train");
+		post.send();
+		String content = post.getContent();
+		//System.out.println(content);	
+	}
 
 
 	public RFace[] facesFromJSON(String content) {
