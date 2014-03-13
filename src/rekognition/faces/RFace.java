@@ -1,8 +1,7 @@
 package rekognition.faces;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import processing.data.JSONArray;
+import processing.data.JSONObject;
 
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -191,7 +190,7 @@ public class RFace {
 	}
 
 
-	public void setBox(JSONObject box) throws JSONException {
+	public void setBox(JSONObject box) {
 		setTopLeft(jsonPVector(box,"tl"));
 		JSONObject size = box.getJSONObject("size");
 		setWidth(size.getDouble("width"));
@@ -204,59 +203,43 @@ public class RFace {
 	}
 
 
-	public void fromJSON(String content) {
-		try {
-			JSONObject data = new JSONObject(content);
-			fromJSON(data);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
+	/*public void fromJSON(String content) {
+		JSONObject data = p5.parseJSONObject(content);
+		fromJSON(data);
+	}*/
 
 	public void fromJSON(JSONObject json) {
-		try {
-			setJSON(json.toString());
-			setBox(json.getJSONObject("boundingbox"));
-			setConfidence(json.getDouble("confidence"));
+		setJSON(json.toString());
+		setBox(json.getJSONObject("boundingbox"));
+		setConfidence(json.getDouble("confidence"));
 
-			setEyeLeft(jsonPVector(json,"eye_left"));
-			setEyeRight(jsonPVector(json,"eye_right"));
-			setNose(jsonPVector(json,"nose"));
-			setMouthLeft(jsonPVector(json,"mouth_l"));
-			setMouthRight(jsonPVector(json,"mouth_r"));
+		setEyeLeft(jsonPVector(json,"eye_left"));
+		setEyeRight(jsonPVector(json,"eye_right"));
+		setNose(jsonPVector(json,"nose"));
+		setMouthLeft(jsonPVector(json,"mouth_l"));
+		setMouthRight(jsonPVector(json,"mouth_r"));
 
-			setAge(json.getDouble("age"));
-			setSmile(json.getDouble("smile"));
-			setGender(json.getDouble("sex"));
-			setGlasses(json.getDouble("glasses"));
-			setEyesClosed(json.getDouble("eye_closed"));
+		setAge(json.getDouble("age"));
+		setSmile(json.getDouble("smile"));
+		setGender(json.getDouble("sex"));
+		setGlasses(json.getDouble("glasses"));
+		setEyesClosed(json.getDouble("eye_closed"));
 
+		if (json.hasKey("matches")) {
+			JSONArray matches = json.getJSONArray("matches");
+			names = new FloatDict();
 
-			if (json.has("matches")) {
-				JSONArray matches = json.getJSONArray("matches");
-				names = new FloatDict();
-
-				for (int i = 0; i < matches.length(); i++) {
-					JSONObject match = matches.getJSONObject(i);
-					names.set(match.getString("tag"),(float)match.getDouble("score"));
-				} 
-			}
-
-		} catch (JSONException e) {
-			//e.printStackTrace();
+			for (int i = 0; i < matches.size(); i++) {
+				JSONObject match = matches.getJSONObject(i);
+				names.set(match.getString("tag"),(float)match.getDouble("score"));
+			} 
 		}
-
 	}
 
-	private PVector jsonPVector(JSONObject obj, String s) throws JSONException {
-		try {
-			JSONObject point = obj.getJSONObject(s);
-			PVector v = new PVector((float)point.getDouble("x"),(float)point.getDouble("y"));
-			return v;
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return new PVector(-1,-1);
-		}
+	private PVector jsonPVector(JSONObject obj, String s) {
+		JSONObject point = obj.getJSONObject(s);
+		PVector v = new PVector((float)point.getDouble("x"),(float)point.getDouble("y"));
+		return v;
 	}
 
 	public float left() {
@@ -271,9 +254,4 @@ public class RFace {
 		if (names == null) return new FloatDict();
 		return names;
 	}
-
-
-
-
-
 }

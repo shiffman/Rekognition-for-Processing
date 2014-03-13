@@ -1,10 +1,8 @@
 package rekognition.examples;
 
-import java.io.File;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import rekognition.faces.RFace;
 import rekognition.faces.Rekognition;
 
 public class AddFaceAndTrain extends PApplet {

@@ -1,14 +1,13 @@
 package rekognition.faces;
 
-import httprocessing.PostRequest;
+import http.requests.PostRequest;
 
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import processing.data.JSONArray;
+import processing.data.JSONObject;
 
 import processing.core.PApplet;
 //import processing.core.PImage;
@@ -19,7 +18,7 @@ public class Rekognition {
 	String rekog_secret = "";
 
 	PApplet p5;
-	
+
 	String name_space = "default";
 	String user_id = "default";
 
@@ -30,12 +29,12 @@ public class Rekognition {
 		rekog_key = key;
 		rekog_secret = secret;
 	}
-	
+
 	public RFace[] detectFacesPath(String path) {
 		File f = new File(p5.sketchPath(path));
 		// Now try the data path
 		if (!f.exists()) {
-		   f = new File(p5.dataPath(path));
+			f = new File(p5.dataPath(path));
 		}
 		// Not worrying about size for now
 		/*long size = f.length();
@@ -71,8 +70,8 @@ public class Rekognition {
 		String content = post.getContent();
 		return facesFromJSON(content);
 	}
-	
-	
+
+
 	public RFace[] recognize(String s) {
 		Pattern p = Pattern.compile("^http",Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(s);
@@ -93,13 +92,13 @@ public class Rekognition {
 		}
 	}
 
-	
-	
+
+
 	public RFace[] detectFaces(File f) {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
-		
+
 		post.addData("name_space",name_space);
 		post.addData("user_id",user_id);
 
@@ -109,21 +108,21 @@ public class Rekognition {
 		String content = post.getContent();
 		return facesFromJSON(content);
 	}
-	
+
 	public RFace[]  recognizeFacesPath(String path) {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
-		
+
 		post.addData("name_space",name_space);
 		post.addData("user_id",user_id);
 
 		post.addData("job_list", "face_recognize_part_gender_emotion_age_glass");
 		File f = new File(p5.sketchPath(path));
-		
+
 		// Now try data paths
 		if (!f.exists()) {
-		   f = new File(p5.dataPath(path));
+			f = new File(p5.dataPath(path));
 		}
 		post.addFile("uploaded_file", f);
 		post.send();
@@ -131,12 +130,12 @@ public class Rekognition {
 
 		return facesFromJSON(content);
 	}
-	
+
 	public RFace[]  recognizeFacesURL(String url) {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
-		
+
 		post.addData("name_space",name_space);
 		post.addData("user_id",user_id);
 
@@ -148,33 +147,33 @@ public class Rekognition {
 
 		return facesFromJSON(content);
 	}
-	
-	
+
+
 	public void addFace(String path, String name) {
 		name = name.replaceAll("\\s", "_");
 
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
-		
+
 		post.addData("name_space",name_space);
 		post.addData("user_id",user_id);
 
 		post.addData("job_list", "face_add_[" + name + "]");
 
 		File f = new File(p5.sketchPath(path));
-		
+
 		// Now try data path
 		if (!f.exists()) {
-		   f = new File(p5.dataPath(path));
+			f = new File(p5.dataPath(path));
 		}
-		
+
 		post.addFile("uploaded_file", f);
 		post.send();
 	}
-	
 
-	
+
+
 	public void train() {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
@@ -189,43 +188,37 @@ public class Rekognition {
 		//String content = post.getContent();
 		//System.out.println(content);	
 	}
-	
-	
+
+
 	public PostRequest createPostRequest() {
 		PostRequest post = new PostRequest(api);
 		post.addData("api_key", rekog_key);
 		post.addData("api_secret", rekog_secret);
-		
+
 		post.addData("name_space",name_space);
 		post.addData("user_id",user_id);
 		return post;
 	}
-	
-	
-	
+
+
+
 
 	public RFace[] facesFromJSON(String content) {
-		try {
-			JSONObject data = new JSONObject(content);
-			JSONArray facearray = data.getJSONArray("face_detection");
+		JSONObject data = p5.parseJSONObject(content);
+		JSONArray facearray = data.getJSONArray("face_detection");
 
-			RFace[] faces = new RFace[facearray.length()];
-			for (int i = 0; i < faces.length; i++) {
-				faces[i] = new RFace();  // Fix to include width and height!
-				faces[i].fromJSON(facearray.getJSONObject(i));
-			}
-			return faces;
-		} catch (JSONException e) {
-			e.printStackTrace();
+		RFace[] faces = new RFace[facearray.size()];
+		for (int i = 0; i < faces.length; i++) {
+			faces[i] = new RFace();  // Fix to include width and height!
+			faces[i].fromJSON(facearray.getJSONObject(i));
 		}
-		return null;
-
+		return faces;
 	}
-	
+
 	public void setNamespace(String s) {
 		name_space = s;
 	}
-	
+
 	public void setUserID(String s) {
 		user_id = s;
 	}

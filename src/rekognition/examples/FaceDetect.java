@@ -1,7 +1,5 @@
 package rekognition.examples;
 
-import java.io.File;
-
 import processing.core.PApplet;
 import processing.core.PImage;
 import rekognition.faces.RFace;
