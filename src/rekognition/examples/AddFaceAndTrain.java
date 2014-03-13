@@ -18,8 +18,8 @@ public class AddFaceAndTrain extends PApplet {
 		face.setNamespace("faceit2");
 		face.setUserID("shiffman");
 		
-		face.addFace("data/pitt.jpg", "Brad Pitt");
-		face.addFace("data/obama.jpg","Barack Obama");
+		face.addFace("pitt.jpg", "Brad Pitt");
+		face.addFace("obama.jpg","Barack Obama");
 		  	
 		face.train();	
 	}

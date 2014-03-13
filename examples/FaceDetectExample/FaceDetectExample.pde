@@ -1,12 +1,16 @@
-// This example also requires the HTTPProcessing library
-// https://www.dropbox.com/s/fqzddqqfhzt7580/HTTProcessing.zip
+// Rekognition for Processing example
+// Daniel Shiffman
+// https://github.com/shiffman/Rekognition-for-Processing/
+
+// This example also requires HTTP Requests for Processing
+// https://github.com/runemadsen/HTTP-Requests-for-Processing
 
 // Also, you need an API key.
 // Sign up here: http://rekognition.com/register/
 // Make a text file in your data folder called key.txt
 // Put your API key on the first line and your API secret on the second line
 
-import httprocessing.*;
+import http.requests.*;
 import rekognition.faces.*;
 
 Rekognition rekog;
